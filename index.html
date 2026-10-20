@@ -13,22 +13,24 @@
     <!-- BAGIAN 1: CSS (TAMPILAN) -->
     <style>
         :root {
-            --bg: #eef2f7;
+            --bg: #f7eef3;
             --kartu: #ffffff;
             --teks: #14213d;
             --teks-redup: #5b667a;
             --garis: #d6dde8;
             --aksen: #1d4ed8;
+
         }
 
         @media (prefers-color-scheme: dark) {
             :root {
-                --bg: #0e1522;
-                --kartu: #172033;
-                --teks: #e8edf6;
-                --teks-redup: #98a4ba;
+                --bg: #f7cadd;
+                --kartu: #fbb1bd;
+                --teks: #000;
+                --teks-redup: #252525;
                 --garis: #2a3650;
-                --aksen: #6c9bff;
+                --aksen: #0b58ff;
+    
             }
         }
 
@@ -116,7 +118,7 @@
 
         .pita {
             height: 56px;
-            background: hsl(var(--hue) 65% 45%);
+            background: #ff85a1;
         }
 
         .isi {
@@ -327,7 +329,7 @@
         // Membuat satu kartu dari satu baris data siswa.
         function buatKartu(s) {
             const kartu = el("article", "kartu");
-            kartu.style.setProperty("--hue", warnaKelas(s.kelas));
+            kartu.style.setProperty("--kartuAtas", warnaKelas(s.kelas));
 
             kartu.appendChild(el("div", "pita"));
 
