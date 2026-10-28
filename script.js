@@ -3,8 +3,8 @@
 
 // 1. KONFIGURASI SUPABASE
 // Ganti URL dengan Project URL dari dashboard Supabase.
-const SUPABASE_URL = "https://PROJECT_ID.supabase.co";
-const SUPABASE_ANON_KEY = "TEMPELKAN_PUBLISHABLE_KEY_KAMU";
+const SUPABASE_URL = "https://lrcqmfojorrtnhnsufyr.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_koQMsXJ0Frd2MBU4_a6V_A_z1lP9QQg";
 
 const db = window.supabase.createClient(
     SUPABASE_URL,
