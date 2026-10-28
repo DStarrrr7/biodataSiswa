@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Biodata Siswa</title>
+    <title>Biodata Siswa dan Guru</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -93,6 +93,25 @@
         .kontrol input { flex: 1 1 220px; }
         .kontrol select { flex: 0 1 180px; }
         .jumlah { color: var(--redup); font-size: .9rem; }
+
+        .guru-section { margin: 28px 0; }
+        .bagian-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        .bagian-header h2 { margin: 0; font-size: 1.25rem; }
+        .daftar-guru {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 16px;
+        }
+        .kartu-guru { padding: 18px; }
+        .kartu-guru .nama { margin-bottom: 4px; }
+        .kartu-guru .nis { margin-bottom: 12px; }
 
         .daftar {
             display: grid;
@@ -225,11 +244,11 @@
     <div class="wadah">
         <header>
             <div>
-                <h1>Biodata Siswa</h1>
-                <p>Cari siswa berdasarkan nama atau NIS.</p>
+                <h1>Teknik Komputer dan Jaringan </h1>
+                <p>Cari Siswa atau Guru Berdasarkan Nama</p>
             </div>
             <button type="button" class="btn-tambah" id="btnTambah">
-                ➕ Tambah Siswa
+                 Tambah Siswa
             </button>
         </header>
 
@@ -238,12 +257,84 @@
                    placeholder="Cari nama atau NIS"
                    aria-label="Cari nama atau NIS">
             <select id="filterKelas" aria-label="Filter kelas">
-                <option value="">Semua kelas</option>
+                <option value="">Pilih kelas</option>
+            </select>
+            <select id="filterGuru" aria-label="Pilih guru">
+                <option value="">Pilih guru</option>
             </select>
         </div>
 
+        <section class="guru-section" aria-labelledby="guruJudul">
+            <div class="bagian-header">
+                <h2 id="guruJudul">Data Guru</h2>
+                <button type="button" class="btn-tambah" id="btnTambahGuru">
+                    Tambah Guru
+                </button>
+            </div>
+            <main id="daftarGuru" class="daftar-guru" aria-live="polite"></main>
+        </section>
+
         <p id="jumlah" class="jumlah" aria-live="polite"></p>
         <main id="daftar" class="daftar" aria-live="polite"></main>
+    </div>
+
+    <div id="modalGuru" class="modal">
+        <section class="modal-konten"
+                 role="dialog" aria-modal="true"
+                 aria-labelledby="modalGuruJudul">
+            <h2 id="modalGuruJudul">Tambah Data Guru</h2>
+
+            <form id="formGuru">
+                <input type="hidden" id="guruId">
+
+                <div class="form-grup">
+                    <label for="guruNama">Nama *</label>
+                    <input id="guruNama" type="text" required maxlength="150">
+                </div>
+
+                <div class="form-grup">
+                    <label for="guruMapel">Mata Pelajaran *</label>
+                    <input id="guruMapel" type="text" required maxlength="150">
+                </div>
+
+                <div class="form-grup">
+                    <label for="guruGender">Gender *</label>
+                    <select id="guruGender" required>
+                        <option value="">-- Pilih --</option>
+                        <option value="Laki-laki">Laki-laki</option>
+                        <option value="Perempuan">Perempuan</option>
+                    </select>
+                </div>
+
+                <div class="form-grup">
+                    <label for="guruAlamat">Alamat</label>
+                    <input id="guruAlamat" type="text" maxlength="250">
+                </div>
+
+                <div class="form-grup">
+                    <label for="guruEmail">Alamat Email *</label>
+                    <input id="guruEmail" type="email" required maxlength="254">
+                </div>
+
+                <div class="form-grup">
+                    <label for="guruJurusan">Jurusan *</label>
+                    <select id="guruJurusan" required>
+                        <option value="">-- Pilih jurusan --</option>
+                        <option value="TKJ">TKJ (Teknik Komputer dan Jaringan)</option>
+                        <option value="TKR">TKR (Teknik Kendaraan Ringan)</option>
+                    </select>
+                </div>
+
+                <div class="modal-tombol">
+                    <button type="button" class="btn-batal" id="btnBatalGuru">
+                        Batal
+                    </button>
+                    <button type="submit" class="btn-simpan" id="btnSimpanGuru">
+                        Simpan Guru
+                    </button>
+                </div>
+            </form>
+        </section>
     </div>
 
     <div id="modalSiswa" class="modal">
