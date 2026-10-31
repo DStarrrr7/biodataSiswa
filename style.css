@@ -1,0 +1,484 @@
+/* ==============================
+   TEMA DAN PENGATURAN DASAR
+============================== */
+:root {
+    color-scheme: dark;
+    --bg: #0d1423;
+    --kartu: #172238;
+    --teks: #edf2ff;
+    --redup: #9aa8c0;
+    --garis: #344158;
+    --aksen: #1764d8;
+    --hapus: #ff7777;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-width: 320px;
+    background: var(--bg);
+    color: var(--teks);
+    font-family: "Plus Jakarta Sans", sans-serif;
+    line-height: 1.5;
+}
+
+button, input, select {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+/* ==============================
+   LAYOUT UTAMA DAN HEADER
+============================== */
+.wadah {
+    width: min(100% - 40px, 1120px);
+    margin: 0 auto;
+    padding: 42px 0 56px;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 28px;
+}
+
+h1 {
+    margin: 0 0 7px;
+    font-size: clamp(1.8rem, 4vw, 2.65rem);
+    line-height: 1.18;
+    letter-spacing: -.045em;
+    font-weight: 800;
+}
+
+header p {
+    margin: 0;
+    color: var(--redup);
+    font-size: 1.05rem;
+}
+
+/* ==============================
+   TOMBOL
+============================== */
+.btn-tambah, .btn-simpan {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 48px;
+    padding: 11px 19px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--aksen);
+    color: #fff;
+    font-weight: 700;
+    transition: background .2s, transform .2s;
+}
+
+.btn-tambah:hover, .btn-simpan:hover {
+    background: #2878ec;
+    transform: translateY(-1px);
+}
+
+button:disabled {
+    opacity: .55;
+    cursor: wait;
+}
+
+/* ==============================
+   PENCARIAN DAN FILTER
+============================== */
+.kontrol {
+    display: grid;
+    grid-template-columns: minmax(220px, 1fr) minmax(170px, 220px) minmax(170px, 220px);
+    gap: 12px;
+    margin: 0 0 14px;
+}
+
+.kontrol input, .kontrol select,
+.form-grup input, .form-grup select {
+    width: 100%;
+    min-width: 0;
+    min-height: 50px;
+    padding: 11px 14px;
+    border: 1px solid var(--garis);
+    border-radius: 12px;
+    background: var(--kartu);
+    color: var(--teks);
+    outline: none;
+}
+
+.kontrol input::placeholder,
+.form-grup input::placeholder {
+    color: #8794aa;
+}
+
+.kontrol input:focus, .kontrol select:focus,
+.form-grup input:focus, .form-grup select:focus {
+    border-color: #4388f5;
+    box-shadow: 0 0 0 3px rgba(67, 136, 245, .14);
+}
+
+.jumlah {
+    margin: 14px 0 22px;
+    color: var(--redup);
+    font-size: .95rem;
+}
+
+/* ==============================
+   BAGIAN GURU DAN SISWA
+============================== */
+.guru-section {
+    margin: 30px 0;
+}
+
+.bagian-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.bagian-header h2 {
+    margin: 0;
+    font-size: 1.35rem;
+    letter-spacing: -.02em;
+}
+
+.daftar-guru, .daftar {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 290px), 1fr));
+    gap: 20px;
+}
+
+/* ==============================
+   KARTU PROFIL
+============================== */
+.kartu {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid var(--garis);
+    border-radius: 22px;
+    background: var(--kartu);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, .16);
+}
+
+.pita {
+    height: 94px;
+    flex: 0 0 94px;
+    background: #0753bd;
+}
+
+.isi {
+    flex: 1;
+    padding: 0 20px 18px;
+    text-align: center;
+}
+
+.foto {
+    display: grid;
+    place-items: center;
+    width: 112px;
+    height: 112px;
+    margin: -62px auto 12px;
+    overflow: hidden;
+    border: 6px solid var(--kartu);
+    border-radius: 50%;
+    background: #dbeafe;
+    color: #174ea6;
+    font-size: 1.55rem;
+    font-weight: 800;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, .2);
+}
+
+.foto img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.nama {
+    margin: 0 0 3px;
+    font-size: 1.25rem;
+    line-height: 1.35;
+    font-weight: 800;
+    overflow-wrap: anywhere;
+}
+
+.nis {
+    margin: 0 0 20px;
+    color: var(--redup);
+    font-size: .95rem;
+}
+
+.rincian {
+    margin: 0;
+    text-align: left;
+    font-size: .94rem;
+}
+
+.rincian div {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 16px;
+    padding: 11px 0;
+    border-top: 1px solid var(--garis);
+}
+
+.rincian dt {
+    flex: 0 0 auto;
+    color: var(--redup);
+}
+
+.rincian dd {
+    min-width: 0;
+    margin: 0;
+    color: var(--teks);
+    font-weight: 700;
+    text-align: right;
+    overflow-wrap: anywhere;
+}
+
+/* ==============================
+   TOMBOL AKSI KARTU
+============================== */
+.kartu-aksi {
+    display: flex;
+    border-top: 1px solid var(--garis);
+    background: rgba(255, 255, 255, .015);
+}
+
+.kartu-aksi button {
+    flex: 1;
+    min-height: 46px;
+    padding: 10px;
+    border: 0;
+    background: transparent;
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.btn-edit { color: #79aaff; }
+
+.btn-hapus {
+    color: var(--hapus);
+    border-left: 1px solid var(--garis) !important;
+}
+
+/* Guru memakai struktur pita dan avatar yang sama */
+.kartu-guru .isi {
+    padding-top: 0;
+}
+
+.kartu-guru .nama {
+    margin-bottom: 5px;
+}
+
+.kartu-guru .nis {
+    margin-bottom: 15px;
+}
+
+/* ==============================
+   MODAL FORM
+============================== */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    place-items: center;
+    padding: 16px;
+    background: rgba(0, 0, 0, .72);
+    backdrop-filter: blur(5px);
+}
+
+.modal-konten {
+    width: 100%;
+    max-width: 480px;
+    max-height: min(90vh, 800px);
+    overflow-y: auto;
+    padding: 25px;
+    border: 1px solid var(--garis);
+    border-radius: 18px;
+    background: var(--kartu);
+    box-shadow: 0 20px 60px rgba(0, 0, 0, .4);
+}
+
+.modal-konten h2 {
+    margin: 0 0 20px;
+    font-size: 1.35rem;
+}
+
+.form-grup {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    margin-bottom: 14px;
+}
+
+.form-grup label {
+    color: var(--redup);
+    font-size: .9rem;
+    font-weight: 700;
+}
+
+.modal-tombol {
+    display: flex;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 22px;
+}
+
+.btn-batal {
+    min-height: 44px;
+    padding: 9px 16px;
+    border: 1px solid var(--garis);
+    border-radius: 10px;
+    background: transparent;
+    color: var(--teks);
+}
+
+/* ==============================
+   PESAN DAN AKSESIBILITAS
+============================== */
+.pesan {
+    grid-column: 1 / -1;
+    margin: 0;
+    padding: 30px 16px;
+    border: 1px dashed var(--garis);
+    border-radius: 16px;
+    color: var(--redup);
+    text-align: center;
+}
+
+.pesan.galat { color: var(--hapus); }
+
+button:hover { filter: brightness(1.08); }
+
+:focus-visible {
+    outline: 2px solid #78aaff;
+    outline-offset: 3px;
+}
+
+/* ==============================
+   RESPONSIVE TABLET DAN HP
+============================== */
+@media (max-width: 700px) {
+    .wadah {
+        width: 100%;
+        padding: 34px 20px 42px;
+    }
+
+    header {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 22px;
+        margin-bottom: 28px;
+    }
+
+    h1 {
+        max-width: 100%;
+        font-size: clamp(1.8rem, 7vw, 2.35rem);
+    }
+
+    header p { font-size: 1rem; }
+
+    .btn-tambah {
+        min-height: 50px;
+        padding: 12px 20px;
+    }
+
+    .kontrol {
+        grid-template-columns: 1fr;
+        gap: 12px;
+        margin-bottom: 12px;
+    }
+
+    .kontrol input, .kontrol select {
+        min-height: 54px;
+        font-size: 1rem;
+    }
+
+    .jumlah { margin: 15px 0 22px; }
+
+    .guru-section { margin: 30px 0; }
+
+    .bagian-header {
+        align-items: center;
+        margin-bottom: 14px;
+    }
+
+    .bagian-header h2 { font-size: 1.2rem; }
+
+    .daftar, .daftar-guru {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .kartu {
+        width: 100%;
+        border-radius: 22px;
+    }
+
+    .pita {
+        height: 94px;
+        flex-basis: 94px;
+    }
+
+    .isi { padding: 0 18px 18px; }
+
+    .foto {
+        width: 116px;
+        height: 116px;
+        margin-top: -64px;
+        margin-bottom: 12px;
+    }
+
+    .nama { font-size: 1.3rem; }
+    .nis { font-size: .98rem; margin-bottom: 20px; }
+
+    .rincian { font-size: .95rem; }
+    .rincian div { padding: 12px 0; }
+
+    .kartu-aksi button { min-height: 48px; }
+
+    .modal { padding: 12px; }
+
+    .modal-konten {
+        padding: 21px;
+        border-radius: 16px;
+    }
+}
+
+@media (max-width: 380px) {
+    .wadah {
+        padding-right: 15px;
+        padding-left: 15px;
+    }
+
+    .isi {
+        padding-right: 14px;
+        padding-left: 14px;
+    }
+
+    .rincian { font-size: .88rem; }
+    .rincian div { gap: 9px; }
+
+    .bagian-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
