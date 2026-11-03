@@ -682,6 +682,48 @@ function perbaruiTampilanRole() {
 }
 
 
+function buatKartuGuru(guru) {
+    const kartu = el("article", "kartu kartu-guru");
+    const hue = warnaKelas(guru.jurusan || ""); // Menggunakan jurusan untuk variasi warna pita
+
+    const pita = el("div", "pita");
+    pita.style.backgroundColor = `hsl(${hue}, 65%, 45%)`;
+    kartu.appendChild(pita);
+
+    const isi = el("div", "isi");
+    const foto = el("div", "foto");
+    foto.style.backgroundColor = `hsl(${hue}, 55%, 88%)`;
+    foto.style.color = `hsl(${hue}, 65%, 28%)`;
+    foto.textContent = inisial(guru.nama);
+    isi.appendChild(foto);
+
+    isi.appendChild(el("h2", "nama", guru.nama));
+    isi.appendChild(el("p", "nis", guru.mata_pelajaran));
+
+    const rincian = el("dl", "rincian");
+    tambahBaris(rincian, "Jurusan", guru.jurusan);
+    tambahBaris(rincian, "Jenis kelamin", guru.jenis_kelamin);
+    tambahBaris(rincian, "Email", guru.email);
+    tambahBaris(rincian, "Alamat", guru.alamat);
+
+    isi.appendChild(rincian);
+    kartu.appendChild(isi);
+
+    const aksi = el("div", "kartu-aksi");
+
+    const btnEdit = el("button", "btn-edit", "Edit");
+    btnEdit.type = "button";
+    btnEdit.onclick = () => bukaModalEditGuru(guru);
+
+    const btnHapus = el("button", "btn-hapus", "Hapus");
+    btnHapus.type = "button";
+    btnHapus.onclick = () => hapusGuru(guru.id, guru.nama);
+
+    aksi.append(btnEdit, btnHapus);
+    kartu.appendChild(aksi);
+
+    return kartu;
+}
 
 
 
