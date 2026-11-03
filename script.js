@@ -25,7 +25,14 @@ const elDaftar = document.getElementById("daftar");
 const elJumlah = document.getElementById("jumlah");
 const elCari = document.getElementById("cari");
 const elKelas = document.getElementById("filterKelas");
-const elGuru = document.getElementById("filterGuru");
+const elRole = document.getElementById("filterRole");
+
+const bagianSiswa = document.getElementById("bagianSiswa");
+const bagianGuru = document.getElementById("bagianGuru");
+
+const elJumlahGuru = document.getElementById("jumlahGuru");
+
+const modalRole = document.getElementById("modalRole");
 const elDaftarGuru = document.getElementById("daftarGuru");
 
 const modal = document.getElementById("modalSiswa");
@@ -117,8 +124,7 @@ function muatDataGuru() {
             semuaGuru = data;
         }
 
-        isiPilihanGuru();
-        tampilkanGuru();
+        perbaruiTampilanRole();
 
     } catch (error) {
         console.error("Gagal memuat data guru:", error);
@@ -154,7 +160,7 @@ async function muatData() {
     semuaSiswa = data || [];
 
     isiPilihanKelas();
-    tampilkanSiswa();
+perbaruiTampilanRole();
 }
 
 
@@ -292,7 +298,6 @@ function buatKartu(s) {
 
     return kartu;
 }
-
 
 /*
  * ==========================================
@@ -621,122 +626,63 @@ function isiPilihanKelas() {
  */
 
 function tampilkanGuru() {
-    const guruDipilih = elGuru.value;
+    const kataKunci = elCari.value.trim().toLowerCase();
 
-    const daftar = guruDipilih
-        ? semuaGuru.filter((guru) => guru.id === guruDipilih)
-        : semuaGuru;
+    const hasil = semuaGuru.filter((guru) => {
+        const cocokNama = (guru.nama || "")
+            .toLowerCase()
+            .includes(kataKunci);
+
+        const cocokNip = String(guru.nip || "")
+            .toLowerCase()
+            .includes(kataKunci);
+
+        return !kataKunci || cocokNama || cocokNip;
+    });
+
+    elJumlahGuru.textContent =
+        `${hasil.length} dari ${semuaGuru.length} guru`;
 
     elDaftarGuru.replaceChildren();
 
-    if (daftar.length === 0) {
+    if (hasil.length === 0) {
         tampilkanPesanGuru(
             semuaGuru.length === 0
-                ? "Belum ada data guru. Klik Tambah Guru untuk mengisi."
-                : "Guru yang dipilih tidak ditemukan."
+                ? "Belum ada data guru."
+                : "Tidak ada guru yang cocok."
         );
 
         return;
     }
 
-    daftar.forEach((guru) => {
+    hasil.forEach((guru) => {
         elDaftarGuru.appendChild(buatKartuGuru(guru));
     });
 }
 
+function perbaruiTampilanRole() {
+    const role = elRole.value;
 
-function buatKartuGuru(guru) {
-    const kartu = el("article", "kartu kartu-guru");
+    if (role === "siswa") {
+        bagianSiswa.hidden = false;
+        bagianGuru.hidden = true;
 
-    const pita = el("div", "pita");
+        elKelas.hidden = false;
 
-    pita.style.backgroundColor =
-        guru.jurusan === "TKR" ? "#087e9b" : "#0753bd";
+        tampilkanSiswa();
 
-    kartu.appendChild(pita);
+    } else if (role === "guru") {
+        bagianSiswa.hidden = true;
+        bagianGuru.hidden = false;
 
-    const isi = el("div", "isi");
-    const foto = el("div", "foto");
-
-    foto.textContent = inisial(guru.nama);
-
-    foto.style.backgroundColor =
-        guru.jurusan === "TKR" ? "#cffafe" : "#dbeafe";
-
-    foto.style.color =
-        guru.jurusan === "TKR" ? "#155e75" : "#174ea6";
-
-    isi.appendChild(foto);
-
-    isi.appendChild(el("h3", "nama", guru.nama));
-    isi.appendChild(el("p", "nis", guru.jurusan));
-
-    const rincian = el("dl", "rincian");
-
-    tambahBaris(
-        rincian,
-        "Mata pelajaran",
-        guru.mata_pelajaran
-    );
-
-    tambahBaris(
-        rincian,
-        "Gender",
-        guru.jenis_kelamin
-    );
-
-    tambahBaris(
-        rincian,
-        "Alamat",
-        guru.alamat
-    );
-
-    tambahBaris(
-        rincian,
-        "Email",
-        guru.email
-    );
-
-    tambahBaris(
-        rincian,
-        "Jurusan",
-        namaJurusan(guru.jurusan)
-    );
-
-    isi.appendChild(rincian);
-    kartu.appendChild(isi);
-
-    const aksi = el("div", "kartu-aksi");
-
-    const btnEdit = el("button", "btn-edit", "Edit");
-
-    btnEdit.type = "button";
-    btnEdit.onclick = () => bukaModalEditGuru(guru);
-
-    const btnHapus = el("button", "btn-hapus", "Hapus");
-
-    btnHapus.type = "button";
-    btnHapus.onclick = () => hapusGuru(guru.id, guru.nama);
-
-    aksi.append(btnEdit, btnHapus);
-
-    kartu.appendChild(aksi);
-
-    return kartu;
+        elKelas.hidden = true;
+        
+        tampilkanGuru();
+    }
 }
 
 
-function namaJurusan(jurusan) {
-    if (jurusan === "TKJ") {
-        return "TKJ (Teknik Komputer dan Jaringan)";
-    }
 
-    if (jurusan === "TKR") {
-        return "TKR (Teknik Kendaraan Ringan)";
-    }
-
-    return jurusan || "";
-}
 
 
 /*
@@ -776,6 +722,26 @@ function tampilkanPesanGuru(teks, galat = false) {
     );
 }
 
+function perbaruiTampilanRole() {
+    const role = elRole.value;
+
+    if (role === "siswa") {
+        bagianSiswa.hidden = false;
+        bagianGuru.hidden = true;
+
+        elKelas.hidden = false;
+
+        tampilkanSiswa();
+
+    } else if (role === "guru") {
+        bagianSiswa.hidden = true;
+        bagianGuru.hidden = false;
+
+        elKelas.hidden = true;
+
+        tampilkanGuru();
+    }
+}
 
 /*
  * ==========================================
@@ -835,6 +801,23 @@ function tutupModalGuru() {
     formGuru.reset();
 }
 
+function bukaModalRole() {
+    modalRole.style.display = "grid";
+}
+
+function tutupModalRole() {
+    modalRole.style.display = "none";
+}
+
+function pilihRoleTambah(role) {
+    tutupModalRole();
+
+    if (role === "siswa") {
+        bukaModalTambah();
+    } else if (role === "guru") {
+        bukaModalTambahGuru();
+    }
+}
 
 /*
  * ==========================================
@@ -902,7 +885,6 @@ function simpanDataGuru(event) {
 
     semuaGuru = daftarGuru;
 
-    isiPilihanGuru();
     tampilkanGuru();
     tutupModalGuru();
 }
@@ -937,30 +919,34 @@ function hapusGuru(id, nama) {
         elGuru.value = "";
     }
 
-    isiPilihanGuru();
     tampilkanGuru();
 }
 
 
 /*
  * ==========================================
- * 15. EVENT LISTENER
+ * EVENT LISTENER
  * ==========================================
  */
 
-// Tombol tambah siswa
+// Tombol tambah data
 document.getElementById("btnTambah")
-    .addEventListener("click", bukaModalTambah);
+    .addEventListener("click", bukaModalRole);
 
-// Tombol tambah guru
-document.getElementById("btnTambahGuru")
-    .addEventListener("click", bukaModalTambahGuru);
+// Pilihan role untuk tambah data
+document.getElementById("pilihSiswa")
+    .addEventListener("click", () => pilihRoleTambah("siswa"));
 
-// Tombol batal siswa
+document.getElementById("pilihGuru")
+    .addEventListener("click", () => pilihRoleTambah("guru"));
+
+// Tombol batal
+document.getElementById("btnBatalRole")
+    .addEventListener("click", tutupModalRole);
+
 document.getElementById("btnBatal")
     .addEventListener("click", tutupModal);
 
-// Tombol batal guru
 document.getElementById("btnBatalGuru")
     .addEventListener("click", tutupModalGuru);
 
@@ -968,12 +954,16 @@ document.getElementById("btnBatalGuru")
 form.addEventListener("submit", simpanDataSiswa);
 formGuru.addEventListener("submit", simpanDataGuru);
 
-// Pencarian dan filter
-elCari.addEventListener("input", tampilkanSiswa);
-elKelas.addEventListener("change", tampilkanSiswa);
-elGuru.addEventListener("change", tampilkanGuru);
+// Pencarian
+elCari.addEventListener("input", perbaruiTampilanRole);
 
-// Menutup modal ketika area luar diklik
+// Filter kelas
+elKelas.addEventListener("change", tampilkanSiswa);
+
+// Filter role
+elRole.addEventListener("change", perbaruiTampilanRole);
+
+// Klik area luar modal
 modal.addEventListener("click", (event) => {
     if (event.target === modal) {
         tutupModal();
@@ -986,7 +976,13 @@ modalGuru.addEventListener("click", (event) => {
     }
 });
 
-// Menutup modal dengan tombol Escape
+modalRole.addEventListener("click", (event) => {
+    if (event.target === modalRole) {
+        tutupModalRole();
+    }
+});
+
+// Tombol Escape
 document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
         if (modal.style.display === "grid") {
@@ -996,13 +992,17 @@ document.addEventListener("keydown", (event) => {
         if (modalGuru.style.display === "grid") {
             tutupModalGuru();
         }
+
+        if (modalRole.style.display === "grid") {
+            tutupModalRole();
+        }
     }
 });
 
 
 /*
  * ==========================================
- * 16. MENJALANKAN APLIKASI
+ * MENJALANKAN APLIKASI
  * ==========================================
  */
 
