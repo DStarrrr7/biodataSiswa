@@ -482,3 +482,44 @@ button:hover { filter: brightness(1.08); }
         flex-direction: column;
     }
 }
+
+/* Pilihan role pada modal tambah data */
+.pilihan-role {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.pilihan-role button {
+    width: 100%;
+    min-height: 48px;
+}
+
+/* Dropdown role */
+#filterRole {
+    min-width: 150px;
+}
+
+/* Sembunyikan bagian yang tidak aktif */
+[hidden] {
+    display: none !important;
+}
+
+/* Tampilan HP */
+@media (max-width: 600px) {
+    .kontrol {
+        flex-direction: column;
+    }
+
+    .kontrol input,
+    .kontrol select {
+        width: 100%;
+        flex: 1 1 auto;
+        min-height: 48px;
+    }
+
+    .pilihan-role {
+        gap: 10px;
+    }
+}
