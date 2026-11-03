@@ -14,36 +14,84 @@
 <body>
     <div class="wadah">
         <header>
-            <div>
-                <h1>Teknik Komputer Jaringan</h1>
-                <p>Cari berdasarkan role</p>
-            </div>
-            <button type="button" class="btn-tambah" id="btnTambah">+ Tambah Data</button>
-        </header>
+    <div>
+        <h1>Teknik Komputer Jaringan</h1>
+        <p>Cari berdasarkan role</p>
+    </div>
 
-        <div class="kontrol">
-            <input id="cari" type="search"
-                   placeholder="Cari nama, NIS, atau NIP"
-                   aria-label="Cari nama, NIS, atau NIP">
+    <button type="button" class="btn-tambah" id="btnTambah">
+        + Tambah Data
+    </button>
+</header>
 
-            <select id="filterGuru" aria-label="Filter guru">
-                <option value="">Semua Guru</option>
-            </select>
+<div class="kontrol">
+    <input
+        id="cari"
+        type="search"
+        placeholder="Cari nama, NIS, atau NIP"
+        aria-label="Cari nama, NIS, atau NIP"
+    >
 
-            <select id="filterKelas" aria-label="Filter kelas">
-                <option value="">Semua Kelas</option>
-            </select>
-        </div>
+    <select id="filterRole" aria-label="Pilih role">
+        <option value="siswa">Siswa</option>
+        <option value="guru">Guru</option>
+    </select>
+
+    <select id="filterKelas" aria-label="Filter kelas">
+        <option value="">Semua Kelas</option>
+    </select>
+</div>
+
+<!-- Bagian data siswa -->
+<section id="bagianSiswa">
+    <p id="jumlah" class="jumlah" aria-live="polite"></p>
+    <main id="daftar" class="daftar" aria-live="polite"></main>
+</section>
+
+<!-- Bagian data guru -->
+<section id="bagianGuru" class="guru-section" hidden>
+    <p id="jumlahGuru" class="jumlah" aria-live="polite"></p>
+    <main id="daftarGuru" class="daftar-guru" aria-live="polite"></main>
+</section>
 
         <p id="jumlah" class="jumlah" aria-live="polite"></p>
 
-        <section class="guru-section" aria-labelledby="guruJudul">
-            <div class="bagian-header">
-                <h2 id="guruJudul">Data Guru</h2>
-                <button type="button" class="btn-tambah" id="btnTambahGuru">+ Tambah Guru</button>
-            </div>
-            <main id="daftarGuru" class="daftar-guru" aria-live="polite"></main>
-        </section>
+        <!-- Modal Pilihan Role -->
+<div id="modalRole" class="modal">
+    <section class="modal-konten"
+             role="dialog"
+             aria-modal="true"
+             aria-labelledby="modalRoleJudul">
+
+        <h2 id="modalRoleJudul">Tambah Data</h2>
+        <p>Pilih jenis data yang ingin ditambahkan.</p>
+
+        <div class="pilihan-role">
+            <button
+                type="button"
+                class="btn-simpan"
+                id="pilihSiswa">
+                Tambah Siswa
+            </button>
+
+            <button
+                type="button"
+                class="btn-simpan"
+                id="pilihGuru">
+                Tambah Guru
+            </button>
+        </div>
+
+        <div class="modal-tombol">
+            <button
+                type="button"
+                class="btn-batal"
+                id="btnBatalRole">
+                Batal
+            </button>
+        </div>
+    </section>
+</div>
 
         <section class="siswa-section" aria-labelledby="siswaJudul">
             <div class="bagian-header">
