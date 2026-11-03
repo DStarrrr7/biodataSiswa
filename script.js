@@ -676,8 +676,6 @@ function perbaruiTampilanRole() {
         bagianGuru.hidden = false;
 
         elKelas.hidden = true;
-        
-        tampilkanGuru();
     }
 }
 
